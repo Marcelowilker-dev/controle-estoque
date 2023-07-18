@@ -18,6 +18,9 @@ client.query(`
         
         CREATE TABLE IF NOT EXISTS fornecedor (
             id serial PRIMARY KEY,
+            descricao VARCHAR(60) NOT NULL,
+            nomeFantasia VARCHAR(60),
+            cnpj VARCHAR(11) not null,
             CEP integer not null,
             endereco varchar,
             telefone varchar(11)
