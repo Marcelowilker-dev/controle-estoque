@@ -21,9 +21,9 @@ client.query(`
             descricao VARCHAR(60) NOT NULL,
             nomeFantasia VARCHAR(60),
             cnpj VARCHAR(11) not null,
-            CEP integer not null,
+            CEP varchar not null,
             endereco varchar,
-            telefone varchar(11)
+            telefone varchar(14)
         );
         CREATE TABLE IF NOT EXISTS produto (
             id serial PRIMARY KEY,
@@ -33,7 +33,7 @@ client.query(`
             PRECO FLOAT not null,
             OBSERVACAO INTEGER,
             FORNECEDOR_ID INTEGER REFERENCES FORNECEDOR(id) NOT NULL,
-            USUARIO_ID INTEGER REFERENCES FORNECEDOR(id) NOT NULL
+            USUARIO_ID INTEGER REFERENCES usuario(id) NOT NULL
 
         );
 
