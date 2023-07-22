@@ -30,8 +30,8 @@ client.query(`
             descricao varchar(60) not null,
             codbarras VARCHAR(13),
             quantidade INTEGER not null ,
-            PRECO FLOAT not null,
-            OBSERVACAO INTEGER,
+            PRECO NUMERIC (7,2) not null,
+            OBSERVACAO VARCHAR,
             FORNECEDOR_ID INTEGER REFERENCES FORNECEDOR(id) NOT NULL,
             USUARIO_ID INTEGER REFERENCES usuario(id) NOT NULL
 

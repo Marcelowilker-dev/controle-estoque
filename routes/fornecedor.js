@@ -30,4 +30,39 @@ router.post('/cadastro', async (req, res) => {
 
 });
 
+router.get('/', async (req, res) => {
+
+    try {
+        let consultaFornecedores = await client.query('select * from fornecedor')
+        if (consultaFornecedores.rows.length > 0) {
+            res.status(200).json(consultaFornecedores.rows)
+        } else {
+            res.status(404).json({ message: 'Não existem forncedores cadastrados' })
+        }
+    } catch (error) {
+        res.status(500).send({ message: 'erro ao consultar fornecedores' });
+    }
+})
+
+router.get('/:id', async (req, res) => {
+    let { id } = req.params;
+    let { cnpj } = req.query;
+    try {
+
+        let consultaFornecedores = await client.query('select * from fornecedor where id= $1 ', [id])
+
+        if (consultaFornecedores.rows.length > 0) {
+            res.status(200).json(consultaFornecedores.rows)
+        } else if (cnpj) {
+            consultaFornecedores = await client.query('select * from fornecedor where cnpj= $1', [cnpj])
+        } if (consultaFornecedores.rows.length > 0) {
+            res.status(200).json(consultaFornecedores.rows)
+        } else {
+            res.status(404).json({ message: 'fornecedor não cadastrado' })
+        }
+    } catch (error) {
+        res.status(500).send({ message: 'erro ao consultar fornecedores' });
+    }
+})
+
 module.exports = router;
